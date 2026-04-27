@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Pelatih Membaca Cerdas - By Mono</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 20px;
+  color: white;
+}
+
+h1 { margin-bottom: 5px; }
+
+.box {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* INPUT */
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+/* BUTTON KEREN */
+button {
+  padding: 12px 20px;
+  margin: 5px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+#btnRead {
+  background: #ff7a18;
+  color: white;
+}
+
+#btnRandom {
+  background: #00c9a7;
+  color: white;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* TEXT */
+.correct { color: green; }
+.wrong { color: red; font-weight: bold; }
+
+/* PROGRESS */
+#progress {
+  width: 100%;
+  height: 12px;
+  background: #ddd;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+#bar {
+  height: 12px;
+  width: 0%;
+  background: linear-gradient(to right, #00c9a7, #92fe9d);
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📚 Pelatih Membaca Cerdas</h1>
+<p><b>Buatan Anak Hima PGSD</b></p>
+
+<div class="box">
+
+<input type="text" id="nama" placeholder="Masukkan nama kamu">
+
+<br>
+
+<select id="level">
+  <option value="easy">Mudah</option>
+  <option value="medium">Sedang</option>
+  <option value="hard">Sulit</option>
+</select>
+
+<p id="text"></p>
+
+<button id="btnRead">🎤 Mulai Membaca</button>
+<button id="btnRandom">🎲 Soal Baru</button>
+
+<div id="progress"><div id="bar"></div></div>
+
+<div id="result"></div>
+<div id="stats"></div>
+
+</div>
+
+<script>
+
+// DATA
+const data = {
+easy: [
+  "Saya suka membaca buku",
+  "Ini adalah buku cerita"
+],
+medium: [
+  "Saya belajar membaca buku di perpustakaan sekolah",
+  "Membaca buku setiap hari sangat bermanfaat"
+],
+hard: [
+  "Setiap hari saya melatih kemampuan membaca dengan teks panjang agar lebih memahami informasi",
+  "Kemampuan membaca sangat penting untuk meningkatkan wawasan dan pengetahuan seseorang"
+]
+};
+
+// SETUP
+const textEl = document.getElementById("text");
+const levelEl = document.getElementById("level");
+
+function getText() {
+  let arr = data[levelEl.value];
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function setSoal() {
+  textEl.innerText = getText();
+}
+
+setSoal();
+document.getElementById("btnRandom").onclick = setSoal;
+
+
+// SOUND
+function benar() {
+  new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3").play();
+}
+
+function salah() {
+  new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3").play();
+}
+
+
+// RECOGNITION
+document.getElementById("btnRead").onclick = function() {
+
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = "id-ID";
+
+  recognition.onresult = function(event) {
+
+    let hasil = event.results[0][0].transcript.toLowerCase().split(" ");
+    let teks = textEl.innerText.toLowerCase().split(" ");
+
+    let benarCount = 0;
+    let output = "";
+
+    for (let i = 0; i < teks.length; i++) {
+      if (hasil[i] === teks[i]) {
+        output += "<span class='correct'>" + teks[i] + "</span> ";
+        benarCount++;
+      } else {
+        output += "<span class='wrong'>" + teks[i] + "</span> ";
+      }
+    }
+
+    let skor = Math.round((benarCount / teks.length) * 100);
+    let nama = document.getElementById("nama").value || "Siswa";
+
+    document.getElementById("result").innerHTML = output;
+    document.getElementById("bar").style.width = skor + "%";
+
+    let pesan = "";
+
+    if (skor >= 80) {
+      benar();
+      pesan = "🏆 Hebat sekali " + nama + "!";
+    } else if (skor >= 50) {
+      pesan = "👍 Lumayan, terus latihan ya " + nama;
+    } else {
+      salah();
+      pesan = "❗ Ayo semangat lagi " + nama;
+    }
+
+    document.getElementById("stats").innerHTML =
+      "Skor: " + skor + "%<br>" + pesan;
+  };
+
+  recognition.start();
+};
+
+</script>
+
+</body>
+</html>
