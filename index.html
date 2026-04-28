@@ -1,212 +1,610 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Pelatih Membaca Cerdas - By Mono</title>
+<title>Pelatih Membaca Cerdas - HIMA PGSD</title>
 
 <style>
-body {
-  font-family: Arial;
-  text-align: center;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  padding: 20px;
-  color: white;
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+color:white;
+}
+.nav{
+display:flex;
+justify-content:space-around;
+margin:10px;
+}
+.nav button:hover{
+transform:scale(1.05);
+transition:0.2s;
 }
 
-h1 { margin-bottom: 5px; }
-
-.box {
-  background: white;
-  color: black;
-  padding: 20px;
-  border-radius: 20px;
-  max-width: 500px;
-  margin: auto;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+.nav button{
+background:white;
+border:none;
+border-radius:15px;
+padding:10px;
+width:80px;
+display:flex;
+flex-direction:column;
+align-items:center;
+box-shadow:0 5px 10px rgba(0,0,0,0.15);
+font-weight:bold;
 }
 
-/* INPUT */
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  width: 80%;
-  margin-bottom: 10px;
+header{
+background:linear-gradient(135deg,#36d1dc,#5b86e5);
+border-bottom-left-radius:25px;
+border-bottom-right-radius:25px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+.nav button span{
+font-size:22px;
 }
 
-/* BUTTON KEREN */
-button {
-  padding: 12px 20px;
-  margin: 5px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.2s;
+
+.nav button small{
+font-size:12px;
+margin-top:5px;
 }
 
-#btnRead {
-  background: #ff7a18;
-  color: white;
+
+header{
+text-align:center;
+padding:15px;
+font-size:18px;
+font-weight:bold;
 }
 
-#btnRandom {
-  background: #00c9a7;
-  color: white;
+.nav{
+display:flex;
+background:rgba(0,0,0,0.2);
 }
 
-button:hover {
-  transform: scale(1.05);
+.nav button{
+flex:1;
+padding:12px;
+border:none;
+background:transparent;
+color:white;
+font-weight:bold;
+cursor:pointer;
 }
 
-button:active {
-  transform: scale(0.95);
+.nav button:hover{
+background:rgba(255,255,255,0.2);
 }
 
-/* TEXT */
-.correct { color: green; }
-.wrong { color: red; font-weight: bold; }
-
-/* PROGRESS */
-#progress {
-  width: 100%;
-  height: 12px;
-  background: #ddd;
-  border-radius: 10px;
-  margin-top: 10px;
+.section{
+display:none;
+padding:15px;
+animation:fade 0.3s ease;
 }
 
-#bar {
-  height: 12px;
-  width: 0%;
-  background: linear-gradient(to right, #00c9a7, #92fe9d);
-  border-radius: 10px;
+.show{display:block;}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.card{
+  animation:fade 0.5s ease;
+background:white;
+color:black;
+padding:20px;
+border-radius:20px;
+max-width:520px;
+margin:auto;
+box-shadow:0 10px 25px rgba(0,0,0,0.25);
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+}
+
+input,select{
+padding:10px;
+border-radius:10px;
+border:1px solid #ccc;
+width:85%;
+margin:5px;
+}
+
+button{
+padding:12px;
+border:none;
+border-radius:12px;
+margin:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+#startBtn{background:#ff7a18;color:white;}
+#newBtn{background:#00c9a7;color:white;}
+#gameBtn{background:#ff4d6d;color:white;}
+
+.correct{color:green;font-weight:bold;}
+.wrong{color:red;font-weight:bold;}
+
+.bar{
+width:100%;
+height:10px;
+background:#ddd;
+border-radius:10px;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:linear-gradient(to right,#ff8a00,#e52e71);
+transition:0.3s;
+}
+
+.leader{
+background:#f5f5f5;
+color:black;
+padding:10px;
+margin:5px;
+border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📚 Pelatih Membaca Cerdas</h1>
-<p><b>Buatan Anak Hima PGSD</b></p>
+<header style="text-align:center;padding:20px;position:relative;">
 
-<div class="box">
+<h1 style="margin:0;font-size:24px;">
+📚 Pelatih Membaca Cerdas
+</h1>
 
-<input type="text" id="nama" placeholder="Masukkan nama kamu">
+<p style="margin:5px 0;font-size:13px;">
+By Sergia ✨
+</p>
 
-<br>
+<p style="font-size:12px;opacity:0.9;">
+Belajar membaca jadi lebih seru dan interaktif 🎯
+</p>
+
+<!-- STICKER -->
+<div style="position:absolute;top:10px;left:20px;font-size:22px;">⭐</div>
+<div style="position:absolute;top:15px;right:20px;font-size:22px;">🔥</div>
+<div style="position:absolute;bottom:5px;left:40px;font-size:18px;">🎉</div>
+
+</header>
+</p>
+<div class="nav">
+<button onclick="tab('latihan')">
+<span>📖</span>
+<small>Latihan</small>
+</button>
+
+<button onclick="tab('game')">
+<span>🎮</span>
+<small>Game</small>
+</button>
+
+<button onclick="tab('leader')">
+<span>🏆</span>
+<small>Rank</small>
+</button>
+
+<button onclick="tab('stat')">
+<span>📊</span>
+<small>Statistik</small>
+</button>
+</div>
+
+
+<!-- LATIHAN -->
+<div id="latihan" class="section show">
+<div class="card">
+
+<input id="nama" placeholder="Nama siswa">
 
 <select id="level">
-  <option value="easy">Mudah</option>
-  <option value="medium">Sedang</option>
-  <option value="hard">Sulit</option>
+<option value="easy">Mudah</option>
+<option value="medium">Sedang</option>
+<option value="hard">Sulit</option>
 </select>
 
 <p id="text"></p>
 
-<button id="btnRead">🎤 Mulai Membaca</button>
-<button id="btnRandom">🎲 Soal Baru</button>
+<button id="startBtn">🎤 Mulai Baca</button>
+<button id="newBtn">🎲 Soal Baru</button>
 
-<div id="progress"><div id="bar"></div></div>
+<div class="bar"><div id="xp" class="fill"></div></div>
 
-<div id="result"></div>
-<div id="stats"></div>
+<p id="hasil"></p>
+<p id="stats"></p>
 
+</div>
+</div>
+
+<!-- GAME -->
+<div id="game" class="section">
+<div class="card">
+<h3>🎮 Tebak Kata</h3>
+
+<p id="hint"></p>
+<input id="jawaban">
+
+<button id="gameBtn">Jawab</button>
+<button onclick="nextGame()">Soal Baru</button>
+
+<p id="hasilGame"></p>
+</div>
+</div>
+
+<!-- LEADERBOARD -->
+<div id="leader" class="section">
+<div class="card">
+<h3>🏆 Leaderboard</h3>
+<div id="board"></div>
+</div>
+</div>
+
+<!-- STAT -->
+<div id="stat" class="section">
+<div class="card">
+<h3>📊 Statistik</h3>
+<p id="total"></p>
+<p id="rata"></p>
+<p id="max"></p>
+<p id="levelText"></p>
+</div>
 </div>
 
 <script>
 
-// DATA
-const data = {
-easy: [
-  "Saya suka membaca buku",
-  "Ini adalah buku cerita"
+/* ================= TAB ================= */
+function tab(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+document.getElementById(id).classList.add('show');
+}
+
+/* ================= DATA SOAL ================= */
+const data={
+easy:[
+"Saya suka membaca buku setiap hari di rumah dengan tenang",
+"Saya pergi ke sekolah bersama teman teman setiap pagi",
+"Ibu memasak makanan lezat di dapur untuk keluarga",
+"Ayah bekerja keras untuk kebutuhan keluarga kami",
+"Saya bermain sepak bola bersama teman di lapangan",
+"Saya bangun pagi lalu mandi dan bersiap ke sekolah",
+"Adik sedang belajar menulis huruf dengan pensil",
+"Kami belajar bersama di kelas dengan guru yang baik",
+"Saya membantu ibu membersihkan rumah pada sore hari",
+"Saya membaca cerita sebelum tidur setiap malam"
 ],
-medium: [
-  "Saya belajar membaca buku di perpustakaan sekolah",
-  "Membaca buku setiap hari sangat bermanfaat"
+
+medium:[
+"Saya belajar membaca di perpustakaan sekolah bersama teman teman untuk meningkatkan kemampuan literasi",
+"Membaca buku setiap hari dapat menambah pengetahuan dan memperluas wawasan tentang dunia",
+"Siswa yang rajin belajar akan lebih mudah memahami pelajaran dan mendapatkan nilai yang baik",
+"Guru menjelaskan materi pelajaran dengan sangat jelas sehingga siswa dapat memahami konsep dengan mudah",
+"Kegiatan diskusi kelompok membantu siswa bertukar pendapat dan memahami materi lebih dalam",
+"Kita harus disiplin dalam belajar agar dapat mencapai cita cita yang diinginkan di masa depan",
+"Pendidikan sangat penting untuk membentuk karakter dan masa depan seseorang",
+"Saya membaca artikel pendidikan untuk menambah wawasan tentang teknologi dan ilmu pengetahuan",
+"Belajar tidak hanya di sekolah tetapi juga bisa dari lingkungan sekitar",
+"Siswa yang aktif bertanya akan lebih mudah memahami materi pelajaran"
 ],
-hard: [
-  "Setiap hari saya melatih kemampuan membaca dengan teks panjang agar lebih memahami informasi",
-  "Kemampuan membaca sangat penting untuk meningkatkan wawasan dan pengetahuan seseorang"
+
+hard:[
+"Literasi digital di era modern sangat penting untuk membantu manusia memahami informasi secara kritis dan tidak mudah terpengaruh berita palsu di internet",
+"Kemampuan membaca tingkat tinggi melibatkan analisis, interpretasi, dan evaluasi terhadap berbagai jenis teks kompleks dalam kehidupan sehari hari",
+"Perkembangan teknologi informasi membuat manusia harus lebih bijak dalam menyaring informasi yang benar dan relevan dari berbagai sumber digital",
+"Pendidikan abad 21 menuntut siswa untuk memiliki kemampuan berpikir kritis, kreatif, kolaboratif, dan komunikatif dalam menghadapi tantangan global",
+"Membaca bukan hanya memahami teks tetapi juga menghubungkan informasi dengan pengalaman dan pengetahuan yang sudah dimiliki",
+"Era digital menuntut kemampuan literasi yang lebih luas termasuk literasi media, data, dan teknologi informasi",
+"Siswa harus mampu memahami teks panjang yang berisi informasi kompleks dan mengambil kesimpulan yang tepat",
+"Globalisasi membuat pertukaran informasi semakin cepat sehingga kemampuan literasi menjadi sangat penting",
+"Pembelajaran modern menekankan kemampuan berpikir tingkat tinggi dalam menyelesaikan masalah",
+"Membaca kritis membantu seseorang membedakan fakta, opini, dan propaganda dalam sebuah informasi"
 ]
 };
 
-// SETUP
-const textEl = document.getElementById("text");
-const levelEl = document.getElementById("level");
+const textEl=document.getElementById("text");
+const levelEl=document.getElementById("level");
 
-function getText() {
-  let arr = data[levelEl.value];
-  return arr[Math.floor(Math.random() * arr.length)];
+function soalBaru(){
+let arr=data[levelEl.value];
+textEl.innerText=arr[Math.floor(Math.random()*arr.length)];
+}
+soalBaru();
+
+document.getElementById("newBtn").onclick=soalBaru;
+
+/* ================= SUARA ================= */
+function speak(msg){
+let s=new SpeechSynthesisUtterance(msg);
+s.lang="id-ID";
+speechSynthesis.speak(s);
+}
+/* ===== USER SYSTEM ===== */
+let currentUser = "";
+
+function setUser(){
+let nama = document.getElementById("nama").value.trim();
+
+if(!nama){
+alert("Isi nama dulu Anak-anak:D!");
+return false;
 }
 
-function setSoal() {
-  textEl.innerText = getText();
+currentUser = nama;
+
+/* buat data kalau belum ada */
+if(!localStorage.getItem("user_"+nama)){
+localStorage.setItem("user_"+nama, JSON.stringify([]));
 }
 
-setSoal();
-document.getElementById("btnRandom").onclick = setSoal;
+return true;
+}
+/* ======================= */
 
+/* ================= XP ================= */
+let xp=0;
 
-// SOUND
-function benar() {
-  new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3").play();
+/* ================= MIC ================= */
+document.getElementById("startBtn").onclick=function(){
+if(!setUser()) return;
+const r=new webkitSpeechRecognition();
+r.lang="id-ID";
+
+r.onresult=function(e){
+
+let hasil=e.results[0][0].transcript.toLowerCase().split(" ");
+let teks=textEl.innerText.toLowerCase().split(" ");
+
+let benar=0;
+let out="";
+
+function soundBenar(){
+new Audio("https://www.soundjay.com/buttons/sounds/button-4.mp3").play();
 }
 
-function salah() {
-  new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3").play();
+function soundSalah(){
+new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3").play();
+}
+function soundBenar(){
+new Audio("https://www.soundjay.com/buttons/sounds/button-4.mp3").play();
 }
 
+function soundSalah(){
+new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3").play();
+}
+for(let i=0;i<teks.length;i++){
+if(hasil[i]==teks[i]){
+out+="<span class='correct'>"+teks[i]+"</span> ";
+benar++;
+}else{
+out+="<span class='wrong'>"+teks[i]+"</span> ";
+}
+}
 
-// RECOGNITION
-document.getElementById("btnRead").onclick = function() {
+let skor=Math.round((benar/teks.length)*100);
+xp += skor;
 
-  const recognition = new webkitSpeechRecognition();
-  recognition.lang = "id-ID";
+/* LEVEL SYSTEM */
+let levelText="";
+if(xp >= 1000){
+levelText="🏆 MASTER READER";
+}else if(xp >= 600){
+levelText="⭐ EXPERT";
+}else if(xp >= 300){
+levelText="👍 ADVANCED";
+}else{
+levelText="🌱 BEGINNER";
+}
 
-  recognition.onresult = function(event) {
+document.getElementById("levelText").innerText=levelText;
+let nama=document.getElementById("nama").value||"Siswa";
 
-    let hasil = event.results[0][0].transcript.toLowerCase().split(" ");
-    let teks = textEl.innerText.toLowerCase().split(" ");
+document.getElementById("hasil").innerHTML=out;
 
-    let benarCount = 0;
-    let output = "";
+/* XP */
+xp+=skor;
+document.getElementById("xp").style.width=(xp%100)+"%";
 
-    for (let i = 0; i < teks.length; i++) {
-      if (hasil[i] === teks[i]) {
-        output += "<span class='correct'>" + teks[i] + "</span> ";
-        benarCount++;
-      } else {
-        output += "<span class='wrong'>" + teks[i] + "</span> ";
-      }
-    }
+/* SAVE LEADERBOARD */
+/* simpan ke user */
+let userData = JSON.parse(localStorage.getItem("user_"+currentUser));
+userData.push(skor);
+localStorage.setItem("user_"+currentUser, JSON.stringify(userData));
 
-    let skor = Math.round((benarCount / teks.length) * 100);
-    let nama = document.getElementById("nama").value || "Siswa";
+/* tetap leaderboard */
+let lb=JSON.parse(localStorage.getItem("leaderboard")||"[]");
+lb.push({name:currentUser,score:skor});
+localStorage.setItem("leaderboard",JSON.stringify(lb));
 
-    document.getElementById("result").innerHTML = output;
-    document.getElementById("bar").style.width = skor + "%";
+updateBoard();
 
-    let pesan = "";
+/* FEEDBACK */
+if(skor>=70){
+speak("Luar biasa!");
+}else{
+speak("Coba lagi ya!");
+}
 
-    if (skor >= 80) {
-      benar();
-      pesan = "🏆 Hebat sekali " + nama + "!";
-    } else if (skor >= 50) {
-      pesan = "👍 Lumayan, terus latihan ya " + nama;
-    } else {
-      salah();
-      pesan = "❗ Ayo semangat lagi " + nama;
-    }
+let pesan="";
 
-    document.getElementById("stats").innerHTML =
-      "Skor: " + skor + "%<br>" + pesan;
-  };
+if(skor>=90){
+pesan="🔥 Gila! Hampir sempurna!";
+}else if(skor>=70){
+pesan="👏 Bagus! Terus latihan!";
+}else{
+pesan="💪 Ayo semangat lagi!";
+}
 
-  recognition.start();
+document.getElementById("stats").innerHTML += "<br>"+pesan;
 };
 
+r.start();
+};
+
+/* ================= GAME ================= */
+const gameData=[
+{jawaban:"buku",hint:"Benda untuk membaca cerita"},
+{jawaban:"meja",hint:"Tempat menaruh buku di kelas"},
+{jawaban:"kursi",hint:"Tempat duduk siswa di kelas"},
+{jawaban:"pensil",hint:"Alat untuk menulis di kertas"},
+{jawaban:"penghapus",hint:"Untuk menghapus tulisan pensil"},
+{jawaban:"guru",hint:"Orang yang mengajar di sekolah"},
+{jawaban:"sekolah",hint:"Tempat siswa belajar"},
+{jawaban:"kelas",hint:"Ruangan belajar siswa"},
+{jawaban:"papan",hint:"Tempat menulis di depan kelas"},
+{jawaban:"spidol",hint:"Untuk menulis di papan tulis"},
+{jawaban:"tas",hint:"Untuk membawa buku ke sekolah"},
+{jawaban:"buku",hint:"Sumber ilmu pengetahuan"},
+{jawaban:"ruler",hint:"Alat untuk mengukur atau menggambar garis"},
+{jawaban:"penggaris",hint:"Alat ukur panjang"},
+{jawaban:"kertas",hint:"Media untuk menulis atau menggambar"},
+{jawaban:"bolpoin",hint:"Alat tulis tinta"},
+{jawaban:"jam",hint:"Penunjuk waktu"},
+{jawaban:"pintu",hint:"Tempat masuk kelas"},
+{jawaban:"jendela",hint:"Tempat cahaya masuk"},
+{jawaban:"komputer",hint:"Alat teknologi untuk belajar"}
+];
+
+let idx=0;
+
+function nextGame(){
+idx=Math.floor(Math.random()*gameData.length);
+document.getElementById("hint").innerText="💡 "+gameData[idx].hint;
+document.getElementById("jawaban").value="";
+document.getElementById("hasilGame").innerText="";
+}
+nextGame();
+
+document.getElementById("gameBtn").onclick=function(){
+let j=document.getElementById("jawaban").value.toLowerCase();
+
+function reward(){
+let r=["🎉","✨","🔥","🏆","😎","💯"];
+return r[Math.floor(Math.random()*r.length)];
+}
+if(j==gameData[idx].jawaban){
+document.getElementById("hasilGame").innerText=reward()+" Benar!";
+speak("Benar!");
+}else{
+document.getElementById("hasilGame").innerText="❌ Salah!";
+speak("Salah!");
+}
+};
+
+/* ================= LEADERBOARD ================= */
+function updateBoard(){
+
+let data=JSON.parse(localStorage.getItem("leaderboard")||"[]");
+
+/* urutkan skor */
+data.sort((a,b)=>b.score-a.score);
+
+/* ambil top 10 */
+data=data.slice(0,10);
+
+let html="";
+
+data.forEach((item,index)=>{
+
+let medal="🏅";
+if(index==0) medal="🥇";
+else if(index==1) medal="🥈";
+else if(index==2) medal="🥉";
+
+html+=`
+<div style="
+background:white;
+color:black;
+padding:10px;
+margin:6px;
+border-radius:12px;
+text-align:left;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+">
+<b>${medal} Rank ${index+1}</b><br>
+👤 ${item.name}<br>
+📊 Skor: ${item.score}%
+</div>
+`;
+});
+
+document.getElementById("board").innerHTML=html;
+
+}
+
+updateBoard();
+
+/* ================= STAT ================= */
+window.onload=function(){
+
+let d=JSON.parse(localStorage.getItem("leaderboard")||"[]");
+
+if(d.length==0){
+document.getElementById("total").innerText="Belum ada data";
+return;
+}
+
+let scores=d.map(x=>x.score);
+
+let total=d.length;
+let avg=scores.reduce((a,b)=>a+b,0)/total;
+let max=Math.max(...scores);
+let min=Math.min(...scores);
+
+let level="";
+
+if(avg>=85){
+level="🏆 Master Reader";
+}else if(avg>=70){
+level="⭐ Advanced";
+}else if(avg>=50){
+level="👍 Intermediate";
+}else{
+level="📚 Beginner";
+}
+
+document.getElementById("total").innerText="📌 Total Latihan: "+total;
+document.getElementById("rata").innerText="📊 Rata-rata: "+avg.toFixed(1)+"%";
+document.getElementById("max").innerText="🔥 Tertinggi: "+max+"% | Terendah: "+min+"%";
+
+/* TAMBAHAN LEVEL */
+document.getElementById("levelText").innerText=level;
+
+};
+document.getElementById("nama").addEventListener("input", function(){
+
+let nama = this.value.trim();
+if(!nama) return;
+
+let data = JSON.parse(localStorage.getItem("user_"+nama)||"[]");
+
+if(data.length==0){
+document.getElementById("total").innerText="Belum ada data";
+document.getElementById("rata").innerText="";
+document.getElementById("max").innerText="";
+return;
+}
+
+let avg=data.reduce((a,b)=>a+b,0)/data.length;
+let max=Math.max(...data);
+
+document.getElementById("total").innerText="Latihan: "+data.length;
+document.getElementById("rata").innerText="Rata-rata: "+avg.toFixed(1)+"%";
+document.getElementById("max").innerText="Tertinggi: "+max+"%";
+
+});
+function reward(){
+let r=["🎉","✨","🔥","🏆","😎","💯"];
+return r[Math.floor(Math.random()*r.length)];
+}
 </script>
 
 </body>
